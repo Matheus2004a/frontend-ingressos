@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom'
+import useSignup from './useSignup'
 
 export default function Signup() {
+  const { register, errors, handleSubmit } = useSignup()
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="p-8 max-w-md w-full bg-white rounded-lg border border-gray-200 shadow-md">
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <h3 className="text-center text-3xl font-extrabold text-gray-900">
             Crie uma conta
           </h3>
@@ -21,12 +24,12 @@ export default function Signup() {
               Nome
             </label>
             <input
-              name="name"
               type="text"
-              required
               className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 border rounded-md p-2"
               placeholder="Digite seu nome"
+              {...register('name')}
             />
+            <p className="text-red-500">{errors.name?.message}</p>
           </fieldset>
 
           <fieldset>
@@ -37,12 +40,12 @@ export default function Signup() {
               Email
             </label>
             <input
-              name="email"
               type="email"
-              required
               className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 border rounded-md p-2"
               placeholder="Digite seu email"
+              {...register('email')}
             />
+            <p className="text-red-500">{errors.email?.message}</p>
           </fieldset>
 
           <fieldset>
@@ -53,12 +56,12 @@ export default function Signup() {
               Senha
             </label>
             <input
-              name="password"
               type="password"
-              required
               className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 border rounded-md p-2"
               placeholder="Digite sua senha"
+              {...register('password')}
             />
+            <p className="text-red-500">{errors.password?.message}</p>
           </fieldset>
 
           <button
