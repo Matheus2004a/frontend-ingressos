@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { httpClient } from '../../../app/axios'
+import { httpClient } from '../../../app/services/httpClient'
 import { FormData, schemaSignup } from '../../../app/validations/schemaSignup'
 
 export default function useSignup() {
