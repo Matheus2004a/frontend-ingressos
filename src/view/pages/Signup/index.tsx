@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import useSignup from './useSignup'
+import { Input } from '../../../components/ui/input'
 
 export default function Signup() {
   const { register, errors, handleSubmit } = useSignup()
@@ -23,7 +24,7 @@ export default function Signup() {
             >
               Nome
             </label>
-            <input
+            <Input
               type="text"
               className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 border rounded-md p-2"
               placeholder="Digite seu nome"
@@ -39,7 +40,7 @@ export default function Signup() {
             >
               Email
             </label>
-            <input
+            <Input
               type="email"
               className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 border rounded-md p-2"
               placeholder="Digite seu email"
@@ -55,7 +56,7 @@ export default function Signup() {
             >
               Senha
             </label>
-            <input
+            <Input
               type="password"
               className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 border rounded-md p-2"
               placeholder="Digite sua senha"

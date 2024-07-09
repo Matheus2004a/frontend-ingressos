@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom'
+import { Spinner } from '../../../components/Spinner'
+import { Button } from '../../../components/ui/button'
+import { Input } from '../../../components/ui/input'
 import useSignin from './useSignin'
 
 export default function Signin() {
-  const { register, errors, handleSubmit } = useSignin()
+  const { register, errors, handleSubmit, isLoading } = useSignin()
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -23,9 +26,9 @@ export default function Signin() {
             >
               Email
             </label>
-            <input
+            <Input
               type="email"
-              className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 border rounded-md p-2"
+              className="mt-1 focus:ring-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 border rounded-md p-2"
               placeholder="Digite seu email"
               {...register('email')}
             />
@@ -39,21 +42,23 @@ export default function Signin() {
             >
               Senha
             </label>
-            <input
+            <Input
               type="password"
-              className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 border rounded-md p-2"
+              className="mt-1 focus:ring-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 border rounded-md p-2"
               placeholder="Digite sua senha"
               {...register('password')}
             />
             <p className="text-red-500">{errors.password?.message}</p>
           </fieldset>
 
-          <button
+          <Button
+            disabled={isLoading}
             type="submit"
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 ease-in-out"
           >
-            Login
-          </button>
+            {isLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
+            {!isLoading && 'Login'}
+          </Button>
         </form>
       </div>
     </div>

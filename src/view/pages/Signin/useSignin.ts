@@ -1,8 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { UserSigninRequest } from '../../../app/entities/User'
 import useAuth from '../../../app/hooks/useAuth'
-import { httpClient } from '../../../app/services/httpClient'
+import AuthService from '../../../app/services/AuthService'
 import { FormData, schemaSignin } from '../../../app/validations/schemaSignin'
 
 export default function useSignin() {
@@ -17,18 +19,26 @@ export default function useSignin() {
   const { signin } = useAuth()
   const navigate = useNavigate()
 
-  const handleSubmit = hookFormSubmit(async (credentials) => {
-    const { data } = await httpClient.post('/user/session', credentials)
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: async (data: UserSigninRequest) => AuthService.signin(data),
+    onError: (error: Error) => {
+      console.error(error.message)
+    },
+    onSuccess: () => {
+      navigate('/events')
+    },
+  })
 
-    if (!data) return null
+  const handleSubmit = hookFormSubmit(async (userData) => {
+    const { data } = await mutateAsync(userData)
 
     signin(data.token)
-    navigate('/events')
   })
 
   return {
     register,
     errors,
     handleSubmit,
+    isLoading: isPending,
   }
 }
