@@ -3,33 +3,15 @@ import useAuth from '../../../app/hooks/useAuth'
 import { Button } from '../../../components/ui/button'
 import { Input } from '../../../components/ui/input'
 import { formatDate } from '../../../lib/utils'
-
-const events = [
-  {
-    id: 1,
-    title: 'Evento 1',
-    date: '2021-10-10T03:00:00.000Z',
-    location: 'São Paulo',
-    imageUrl: 'https://via.placeholder.com/150',
-  },
-  {
-    id: 2,
-    title: 'Evento 2',
-    date: '2021-10-10T03:00:00.000Z',
-    location: 'São Paulo',
-    imageUrl: 'https://via.placeholder.com/150',
-  },
-  {
-    id: 3,
-    title: 'Evento 3',
-    date: '2021-10-10T03:00:00.000Z',
-    location: 'São Paulo',
-    imageUrl: 'https://via.placeholder.com/150',
-  },
-]
+import useEvents from './useEvents'
 
 export default function EventList() {
   const { signout } = useAuth()
+  const { events, isLoading } = useEvents()
+
+  if (isLoading) {
+    return <p>Carregando eventos...</p>
+  }
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
@@ -68,9 +50,7 @@ export default function EventList() {
               </div>
               <div>
                 <h3 className="text-lg font-medium">{event.title}</h3>
-                <p className="text-gray-500">
-                  {formatDate(new Date(event.date))}
-                </p>
+                <p className="text-gray-500">{formatDate(event.date)}</p>
                 <p className="text-gray-500">{event.location}</p>
               </div>
             </div>

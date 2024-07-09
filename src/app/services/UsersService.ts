@@ -3,7 +3,8 @@ import { httpClient } from './httpClient'
 
 class UsersService {
   async me() {
-    return httpClient.get<User>('/user/me')
+    const { data } = await httpClient.get<User>('/user/me')
+    return data
   }
 }
 
