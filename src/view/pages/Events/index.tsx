@@ -1,6 +1,8 @@
-import { LogOut, MapPin } from 'lucide-react'
+import { LogOut, MapPin, Search } from 'lucide-react'
 import useAuth from '../../../app/hooks/useAuth'
+import { ModalRegisterEvent } from '../../../components/ModalRegisterEvent'
 import { Button } from '../../../components/ui/button'
+import { DialogTrigger } from '../../../components/ui/dialog'
 import { Input } from '../../../components/ui/input'
 import { formatDate, generateRandomPrice } from '../../../lib/utils'
 import useEvents from './useEvents'
@@ -25,13 +27,21 @@ export default function EventList() {
         Sair
       </Button>
 
-      <form className="flex items-center gap-4 mb-8 max-w-lg">
-        <Input
-          type="search"
-          placeholder="Pesquise por eventos..."
-          className="text-base"
-        />
-        <Button>Cadastrar evento</Button>
+      <form className="flex items-center gap-3 px-4 py-3 max-w-lg">
+        <div className="flex items-center relative w-11/12">
+          <Input
+            type="search"
+            name="q"
+            placeholder="Pesquise por eventos..."
+            className="text-base"
+          />
+          <Search className="w-4 h-4 absolute right-3" />
+        </div>
+        <ModalRegisterEvent>
+          <DialogTrigger asChild>
+            <Button>Cadastrar evento</Button>
+          </DialogTrigger>
+        </ModalRegisterEvent>
       </form>
 
       <ul className="space-y-4 flex flex-col gap-4">

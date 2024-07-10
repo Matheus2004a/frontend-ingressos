@@ -5,7 +5,7 @@ export default function PrivateRoutes() {
   const { signedIn } = useAuth()
 
   if (!signedIn) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/signin" replace />
   }
 
   return <Outlet />

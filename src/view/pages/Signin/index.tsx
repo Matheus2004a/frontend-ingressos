@@ -16,7 +16,10 @@ export default function Signin() {
           </h3>
 
           <p className="text-center">
-            Novo por aqui? <Link to="/signup">Crie uma conta</Link>
+            Novo por aqui?{' '}
+            <Link to="/signup" className="text-blue-500 hover:underline">
+              Crie uma conta
+            </Link>
           </p>
 
           <fieldset>

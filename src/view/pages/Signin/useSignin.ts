@@ -28,7 +28,7 @@ export default function useSignin() {
     },
     onSuccess: () => {
       toast({ title: 'Usuário logado com sucesso' })
-      navigate('/events')
+      navigate('/')
     },
   })
 

@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
-import useSignup from './useSignup'
+import { Spinner } from '../../../components/Spinner'
+import { Button } from '../../../components/ui/button'
 import { Input } from '../../../components/ui/input'
+import useSignup from './useSignup'
 
 export default function Signup() {
-  const { register, errors, handleSubmit } = useSignup()
+  const { register, errors, handleSubmit, isLoading } = useSignup()
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -14,7 +16,10 @@ export default function Signup() {
           </h3>
 
           <p className="text-center">
-            Já possui uma conta? <Link to="/">Faça login</Link>
+            Já possui uma conta?{' '}
+            <Link to="/signin" className="text-blue-500 hover:underline">
+              Faça login
+            </Link>
           </p>
 
           <fieldset>
@@ -65,12 +70,14 @@ export default function Signup() {
             <p className="text-red-500">{errors.password?.message}</p>
           </fieldset>
 
-          <button
+          <Button
+            disabled={isLoading}
             type="submit"
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 ease-in-out"
           >
-            Cadastrar
-          </button>
+            {isLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
+            {!isLoading && 'Cadastrar'}
+          </Button>
         </form>
       </div>
     </div>

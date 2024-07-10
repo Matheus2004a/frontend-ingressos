@@ -28,7 +28,7 @@ export default function useSignup() {
     },
     onSuccess: () => {
       toast({ title: 'Cadastro feito com sucesso' })
-      navigate('/events')
+      navigate('/')
     },
   })
 
