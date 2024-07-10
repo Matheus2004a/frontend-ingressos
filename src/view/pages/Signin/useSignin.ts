@@ -6,6 +6,7 @@ import { UserSigninRequest } from '../../../app/entities/User'
 import useAuth from '../../../app/hooks/useAuth'
 import AuthService from '../../../app/services/AuthService'
 import { FormData, schemaSignin } from '../../../app/validations/schemaSignin'
+import { useToast } from '../../../components/ui/use-toast'
 
 export default function useSignin() {
   const {
@@ -18,13 +19,15 @@ export default function useSignin() {
 
   const { signin } = useAuth()
   const navigate = useNavigate()
+  const { toast } = useToast()
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: async (data: UserSigninRequest) => AuthService.signin(data),
     onError: (error: Error) => {
-      console.error(error.message)
+      toast({ title: error.message, variant: 'destructive' })
     },
     onSuccess: () => {
+      toast({ title: 'Usuário logado com sucesso' })
       navigate('/events')
     },
   })

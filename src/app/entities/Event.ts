@@ -1,7 +1,8 @@
 export interface Event {
   id: string
-  title: string
-  date: string
+  name: string
+  dtStart: string
+  dtEnd: string
   location: string
   imageUrl: string
 }
