@@ -1,3 +1,4 @@
+import { ButtonSpinner } from './ButtonSpinner'
 import { Button } from './ui/button'
 import {
   Dialog,
@@ -21,10 +22,11 @@ import { Input } from './ui/input'
 import useModalRegisterEvent from './useModalRegisterEvent'
 
 export function ModalRegisterEvent() {
-  const { form, onSubmit } = useModalRegisterEvent()
+  const { form, onSubmit, isLoading, isDialogOpen, setIsDialogOpen } =
+    useModalRegisterEvent()
 
   return (
-    <Dialog>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
         <Button>Cadastrar evento</Button>
       </DialogTrigger>
@@ -114,7 +116,9 @@ export function ModalRegisterEvent() {
                   Cancelar
                 </Button>
               </DialogClose>
-              <Button type="submit">Cadastrar</Button>
+              <ButtonSpinner type="submit" isLoading={isLoading}>
+                Cadastrar
+              </ButtonSpinner>
             </DialogFooter>
           </form>
         </Form>

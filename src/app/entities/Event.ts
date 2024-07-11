@@ -8,7 +8,7 @@ export interface Event {
 
 export interface CreateEventRequest {
   name: string
-  userId: string
+  userId: string | undefined
   dtStart: string
   dtEnd: string
   location: string

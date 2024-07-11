@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatDate(date: Date) {
-  return date.toLocaleDateString('pt-BR')
+  return date.toLocaleString('pt-BR')
 }
 
 export function generateRandomPrice(
