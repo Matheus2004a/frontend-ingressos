@@ -26,6 +26,7 @@ export default function useModalRegisterEvent() {
       toast({ title: error.message, variant: 'destructive' })
     },
     onSuccess: () => {
+      form.reset()
       queryClient.invalidateQueries({ queryKey: ['events', user?.id] })
       toast({ title: 'Evento cadastrado com sucesso' })
       setIsDialogOpen(false)
