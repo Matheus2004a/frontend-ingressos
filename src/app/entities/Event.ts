@@ -4,5 +4,12 @@ export interface Event {
   dtStart: string
   dtEnd: string
   location: string
-  imageUrl: string
+}
+
+export interface CreateEventRequest {
+  name: string
+  userId: string
+  dtStart: string
+  dtEnd: string
+  location: string
 }

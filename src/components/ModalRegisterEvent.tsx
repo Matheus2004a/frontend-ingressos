@@ -1,14 +1,4 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { format } from 'date-fns'
-import { CalendarIcon } from 'lucide-react'
-import { useForm } from 'react-hook-form'
-import {
-  FormData,
-  schemaRegisterEvent,
-} from '../app/validations/schemaRegisterEvent'
-import { cn } from '../lib/utils'
 import { Button } from './ui/button'
-import { Calendar } from './ui/calendar'
 import {
   Dialog,
   DialogClose,
@@ -17,6 +7,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from './ui/dialog'
 import {
   Form,
@@ -27,30 +18,17 @@ import {
   FormMessage,
 } from './ui/form'
 import { Input } from './ui/input'
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
+import useModalRegisterEvent from './useModalRegisterEvent'
 
-export function ModalRegisterEvent({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  const form = useForm<FormData>({
-    resolver: zodResolver(schemaRegisterEvent),
-    defaultValues: {
-      name: '',
-      location: '',
-      dtStart: null,
-      dtEnd: null,
-    },
-  })
-
-  function onSubmit(values: FormData) {
-    console.log(values)
-  }
+export function ModalRegisterEvent() {
+  const { form, onSubmit } = useModalRegisterEvent()
 
   return (
     <Dialog>
-      {children}
+      <DialogTrigger asChild>
+        <Button>Cadastrar evento</Button>
+      </DialogTrigger>
+
       <DialogContent className="sm:max-w-[550px]">
         <DialogHeader>
           <DialogTitle>Cadastrar evento</DialogTitle>
@@ -63,6 +41,7 @@ export function ModalRegisterEvent({
             <FormField
               control={form.control}
               name="name"
+              defaultValue=""
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Nome do evento</FormLabel>
@@ -81,6 +60,7 @@ export function ModalRegisterEvent({
             <FormField
               control={form.control}
               name="location"
+              defaultValue=""
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Local do evento</FormLabel>
@@ -96,44 +76,17 @@ export function ModalRegisterEvent({
               )}
             />
 
-            <div className="flex gap-4">
+            <div className="flex items-center justify-between">
               <FormField
                 control={form.control}
                 name="dtStart"
+                defaultValue=""
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
-                    <FormLabel>Data de inicio</FormLabel>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <FormControl>
-                          <Button
-                            variant={'outline'}
-                            className={cn(
-                              'w-[240px] pl-3 text-left font-normal',
-                              !field.value && 'text-muted-foreground',
-                            )}
-                          >
-                            {field.value ? (
-                              format(field.value, 'PPP')
-                            ) : (
-                              <span>Escolha uma data</span>
-                            )}
-                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                          </Button>
-                        </FormControl>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          disabled={(date) =>
-                            date > new Date() || date < new Date('1900-01-01')
-                          }
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
+                  <FormItem>
+                    <FormLabel>Data de início</FormLabel>
+                    <FormControl>
+                      <Input type="datetime-local" {...field} />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -142,46 +95,20 @@ export function ModalRegisterEvent({
               <FormField
                 control={form.control}
                 name="dtEnd"
+                defaultValue=""
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
+                  <FormItem>
                     <FormLabel>Data de término</FormLabel>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <FormControl>
-                          <Button
-                            variant={'outline'}
-                            className={cn(
-                              'w-[240px] pl-3 text-left font-normal',
-                              !field.value && 'text-muted-foreground',
-                            )}
-                          >
-                            {field.value ? (
-                              format(field.value, 'PPP')
-                            ) : (
-                              <span>Escolha uma data</span>
-                            )}
-                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                          </Button>
-                        </FormControl>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          disabled={(date) =>
-                            date > new Date() || date < new Date('1900-01-01')
-                          }
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
+                    <FormControl>
+                      <Input type="datetime-local" {...field} />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
-            <DialogFooter className="flex flex-row sm:justify-between">
+
+            <DialogFooter>
               <DialogClose asChild>
                 <Button type="button" variant="destructive">
                   Cancelar

@@ -2,7 +2,6 @@ import { LogOut, MapPin, Search } from 'lucide-react'
 import useAuth from '../../../app/hooks/useAuth'
 import { ModalRegisterEvent } from '../../../components/ModalRegisterEvent'
 import { Button } from '../../../components/ui/button'
-import { DialogTrigger } from '../../../components/ui/dialog'
 import { Input } from '../../../components/ui/input'
 import { formatDate, generateRandomPrice } from '../../../lib/utils'
 import useEvents from './useEvents'
@@ -37,11 +36,7 @@ export default function EventList() {
           />
           <Search className="w-4 h-4 absolute right-3" />
         </div>
-        <ModalRegisterEvent>
-          <DialogTrigger asChild>
-            <Button>Cadastrar evento</Button>
-          </DialogTrigger>
-        </ModalRegisterEvent>
+        <ModalRegisterEvent />
       </form>
 
       <ul className="space-y-4 flex flex-col gap-4">
