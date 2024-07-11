@@ -1,6 +1,6 @@
+import { ButtonSpinner } from '@/components/ButtonSpinner'
+import { Input } from '@/components/ui/input'
 import { Link } from 'react-router-dom'
-import { ButtonSpinner } from '../../../components/ButtonSpinner'
-import { Input } from '../../../components/ui/input'
 import useSignin from './useSignin'
 
 export default function Signin() {

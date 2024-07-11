@@ -1,6 +1,6 @@
+import useAuth from '@/app/hooks/useAuth'
+import EventsServices from '@/app/services/EventsServices'
 import { useQuery } from '@tanstack/react-query'
-import useAuth from '../../../app/hooks/useAuth'
-import EventsServices from '../../../app/services/EventsServices'
 
 export default function useEvents() {
   const { user } = useAuth()

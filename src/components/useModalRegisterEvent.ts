@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { CreateEventRequest } from '../app/entities/Event'
 import useAuth from '../app/hooks/useAuth'
 import EventsServices from '../app/services/EventsServices'
+import { httpClient } from '../app/services/httpClient'
 import {
   schemaRegisterEvent,
   TypeSchemaRegisterEvent,
@@ -52,11 +53,20 @@ export default function useModalRegisterEvent() {
     mutateAsync(payload)
   }
 
+  async function getLocations() {
+    const { data } = await httpClient.get(
+      'https://servicodados.ibge.gov.br/api/v1/localidades/estados/35/municipios',
+    )
+
+    console.log({ locations: data })
+  }
+
   return {
     form,
     onSubmit,
     isLoading: isPending,
     isDialogOpen,
     setIsDialogOpen,
+    getLocations,
   }
 }

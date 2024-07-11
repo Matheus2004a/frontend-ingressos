@@ -10,6 +10,10 @@ class EventsServices {
   async create(credentials: CreateEventRequest) {
     return httpClient.post('/event/create', credentials)
   }
+
+  async remove(eventId: string) {
+    return httpClient.delete(`/event/delete/${eventId}`)
+  }
 }
 
 export default new EventsServices()

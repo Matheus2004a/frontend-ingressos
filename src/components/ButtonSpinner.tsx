@@ -9,11 +9,12 @@ interface ButtonSpinnerProps
 
 export function ButtonSpinner({
   isLoading = false,
+  onClick = null,
   children,
   ...rest
 }: ButtonSpinnerProps) {
   return (
-    <Button disabled={isLoading} {...rest}>
+    <Button disabled={isLoading} onClick={onClick} {...rest}>
       {isLoading ? <Spinner className="mr-2 h-4 w-4 animate-spin" /> : children}
     </Button>
   )
