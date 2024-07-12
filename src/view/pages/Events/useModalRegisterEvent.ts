@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { CreateEventRequest } from '../../../app/entities/Event'
 import useAuth from '../../../app/hooks/useAuth'
@@ -14,6 +14,7 @@ import { toast } from '../../../components/ui/use-toast'
 
 export default function useModalRegisterEvent() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const isFirstRender = useRef(true)
 
   const { user, signout } = useAuth()
   const form = useForm<TypeSchemaRegisterEvent>({
@@ -34,6 +35,17 @@ export default function useModalRegisterEvent() {
       setIsDialogOpen(false)
     },
   })
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+
+    if (!isDialogOpen && !form.formState.isValid) {
+      form.clearErrors()
+    }
+  }, [form, isDialogOpen])
 
   async function onSubmit(values: TypeSchemaRegisterEvent) {
     const dtEndIsBeforeDtStart = values.dtEnd < values.dtStart
