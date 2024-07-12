@@ -1,6 +1,4 @@
 import useAuth from '@/app/hooks/useAuth'
-import { ModalRegisterEvent } from '@/components/ModalRegisterEvent'
-import { ModalRemoveEvent } from '@/components/ModalRemoveEvent'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -11,12 +9,14 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { formatDate, generateRandomPrice } from '@/lib/utils'
+import { ModalRegisterEvent } from '@/view/pages/Events/components/ModalRegisterEvent'
+import { ModalRemoveEvent } from '@/view/pages/Events/components/ModalRemoveEvent'
 import { LogOut, MapPin, Search } from 'lucide-react'
 import useEvents from './useEvents'
 
 export default function EventList() {
   const { signout } = useAuth()
-  const { events, isLoading } = useEvents()
+  const { events, isLoading, handleSearch, query } = useEvents()
 
   if (isLoading) {
     return <p>Carregando eventos...</p>
@@ -34,11 +34,15 @@ export default function EventList() {
         Sair
       </Button>
 
-      <form className="flex items-center gap-3 max-w-lg mb-4">
+      <form
+        className="flex items-center gap-3 max-w-lg mb-4"
+        onSubmit={handleSearch}
+      >
         <div className="flex items-center relative w-11/12">
           <Input
             type="search"
             name="q"
+            defaultValue={query ?? ''}
             placeholder="Pesquise por eventos..."
             className="text-base"
           />
@@ -48,7 +52,7 @@ export default function EventList() {
       </form>
 
       <ul className="flex flex-col gap-4">
-        {events.map((event) => (
+        {events?.map((event) => (
           <Card key={event.id} className="min-w-[350px]">
             <CardHeader className="flex flex-row justify-between items-center">
               <CardTitle>{event.name}</CardTitle>

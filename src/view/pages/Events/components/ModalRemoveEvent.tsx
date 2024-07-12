@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dialog'
 import useModalRemoveEvent from '@/view/pages/Events/useModalRemoveEvent'
 import { Trash } from 'lucide-react'
-import { ButtonSpinner } from './ButtonSpinner'
+import { ButtonSpinner } from '../../../../components/ButtonSpinner'
 
 interface ModalRemoveEventProps {
   eventId: string

@@ -2,20 +2,20 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { CreateEventRequest } from '../app/entities/Event'
-import useAuth from '../app/hooks/useAuth'
-import EventsServices from '../app/services/EventsServices'
-import { httpClient } from '../app/services/httpClient'
+import { CreateEventRequest } from '../../../app/entities/Event'
+import useAuth from '../../../app/hooks/useAuth'
+import EventsServices from '../../../app/services/EventsServices'
+import { httpClient } from '../../../app/services/httpClient'
 import {
   schemaRegisterEvent,
   TypeSchemaRegisterEvent,
-} from '../app/validations/schemaRegisterEvent'
-import { toast } from './ui/use-toast'
+} from '../../../app/validations/schemaRegisterEvent'
+import { toast } from '../../../components/ui/use-toast'
 
 export default function useModalRegisterEvent() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-  const { user } = useAuth()
+  const { user, signout } = useAuth()
   const form = useForm<TypeSchemaRegisterEvent>({
     resolver: zodResolver(schemaRegisterEvent),
   })
@@ -24,7 +24,8 @@ export default function useModalRegisterEvent() {
   const { mutateAsync, isPending } = useMutation({
     mutationFn: async (data: CreateEventRequest) => EventsServices.create(data),
     onError: (error: Error) => {
-      toast({ title: error.message, variant: 'destructive' })
+      toast({ title: error.message || 'Erro interno', variant: 'destructive' })
+      signout()
     },
     onSuccess: () => {
       form.reset()

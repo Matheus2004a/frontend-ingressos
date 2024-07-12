@@ -1,5 +1,5 @@
-import { ButtonSpinner } from './ButtonSpinner'
-import { Button } from './ui/button'
+import { ButtonSpinner } from '../../../../components/ButtonSpinner'
+import { Button } from '../../../../components/ui/button'
 import {
   Dialog,
   DialogClose,
@@ -9,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from './ui/dialog'
+} from '../../../../components/ui/dialog'
 import {
   Form,
   FormControl,
@@ -17,9 +17,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from './ui/form'
-import { Input } from './ui/input'
-import useModalRegisterEvent from './useModalRegisterEvent'
+} from '../../../../components/ui/form'
+import { Input } from '../../../../components/ui/input'
+import useModalRegisterEvent from '../useModalRegisterEvent'
 
 export function ModalRegisterEvent() {
   const { form, onSubmit, isLoading, isDialogOpen, setIsDialogOpen } =
