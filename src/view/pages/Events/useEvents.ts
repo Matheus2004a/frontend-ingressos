@@ -1,7 +1,7 @@
 import useAuth from '@/app/hooks/useAuth'
 import EventsServices from '@/app/services/EventsServices'
 import { useQuery } from '@tanstack/react-query'
-import { FormEvent } from 'react'
+import { FormEvent, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 export default function useEvents() {
@@ -10,6 +10,13 @@ export default function useEvents() {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const query = searchParams.get('q')
+
+  useEffect(() => {
+    if (!query) {
+      searchParams.delete('q')
+      setSearchParams(searchParams)
+    }
+  }, [query, searchParams, setSearchParams])
 
   const { data, isError, error, isLoading } = useQuery({
     queryKey: ['events', user?.id],
