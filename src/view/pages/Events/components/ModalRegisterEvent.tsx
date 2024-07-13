@@ -1,5 +1,5 @@
-import { ButtonSpinner } from '../../../../components/ButtonSpinner'
-import { Button } from '../../../../components/ui/button'
+import { ButtonSpinner } from '@/components/ButtonSpinner'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogClose,
@@ -9,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../../../../components/ui/dialog'
+} from '@/components/ui/dialog'
 import {
   Form,
   FormControl,
@@ -17,9 +17,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../components/ui/form'
-import { Input } from '../../../../components/ui/input'
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import useModalRegisterEvent from '../useModalRegisterEvent'
+import { SelectCities } from './SelectCities'
 
 export function ModalRegisterEvent() {
   const { form, onSubmit, isLoading, isDialogOpen, setIsDialogOpen } =
@@ -66,13 +67,7 @@ export function ModalRegisterEvent() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Local do evento</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="text"
-                      placeholder="Digite o local do evento"
-                      {...field}
-                    />
-                  </FormControl>
+                  <SelectCities field={field} />
                   <FormMessage />
                 </FormItem>
               )}
