@@ -9,7 +9,7 @@ interface ButtonSpinnerProps
 
 export function ButtonSpinner({
   isLoading = false,
-  onClick = null,
+  onClick,
   children,
   ...rest
 }: ButtonSpinnerProps) {

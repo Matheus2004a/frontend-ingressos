@@ -12,6 +12,7 @@ import { formatDate, generateRandomPrice } from '@/lib/utils'
 import { ModalRegisterEvent } from '@/view/pages/Events/components/ModalRegisterEvent'
 import { ModalRemoveEvent } from '@/view/pages/Events/components/ModalRemoveEvent'
 import { LogOut, MapPin, Search } from 'lucide-react'
+import { ModalUpdateEvent } from './components/ModalUpdateEvent'
 import useEvents from './useEvents'
 
 export default function EventList() {
@@ -56,7 +57,11 @@ export default function EventList() {
           <Card key={event.id} className="min-w-[350px]">
             <CardHeader className="flex flex-row justify-between items-center">
               <CardTitle>{event.name}</CardTitle>
-              <ModalRemoveEvent eventId={event.id} eventName={event.name} />
+
+              <div className="flex items-center">
+                <ModalUpdateEvent event={event} />
+                <ModalRemoveEvent eventId={event.id} eventName={event.name} />
+              </div>
             </CardHeader>
             <CardContent>
               <span className="text-gray-500 flex items-center gap-1">

@@ -1,3 +1,4 @@
+import { Event } from '@/app/entities/Event'
 import { ButtonSpinner } from '@/components/ButtonSpinner'
 import { Button } from '@/components/ui/button'
 import {
@@ -19,32 +20,35 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import useModalRegisterEvent from '../useModalRegisterEvent'
+import { Pen } from 'lucide-react'
+import useModalUpdateEvent from '../useModalUpdateEvent'
 import { SelectCities } from './SelectCities'
 
-export function ModalRegisterEvent() {
+export function ModalUpdateEvent({ event }: { event: Event }) {
   const { form, onSubmit, isLoading, isDialogOpen, setIsDialogOpen } =
-    useModalRegisterEvent()
+    useModalUpdateEvent(event)
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button>Cadastrar evento</Button>
+        <Button variant="ghost">
+          <Pen className="w-5 h-5" />
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-[550px]">
         <DialogHeader>
-          <DialogTitle>Cadastrar evento</DialogTitle>
-          <DialogDescription>
-            Cadastre um novo evento à nossa rede
-          </DialogDescription>
+          <DialogTitle>Editar evento</DialogTitle>
+          <DialogDescription>Atualize um evento à nossa rede</DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form
+            onSubmit={form.handleSubmit((values) => onSubmit(event.id, values))}
+            className="space-y-8"
+          >
             <FormField
               control={form.control}
               name="name"
-              defaultValue=""
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Nome do evento</FormLabel>
@@ -63,7 +67,6 @@ export function ModalRegisterEvent() {
             <FormField
               control={form.control}
               name="location"
-              defaultValue=""
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Local do evento</FormLabel>
@@ -77,7 +80,6 @@ export function ModalRegisterEvent() {
               <FormField
                 control={form.control}
                 name="dtStart"
-                defaultValue=""
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Data de início</FormLabel>
@@ -92,7 +94,6 @@ export function ModalRegisterEvent() {
               <FormField
                 control={form.control}
                 name="dtEnd"
-                defaultValue=""
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Data de término</FormLabel>
@@ -112,7 +113,7 @@ export function ModalRegisterEvent() {
                 </Button>
               </DialogClose>
               <ButtonSpinner type="submit" isLoading={isLoading}>
-                Cadastrar
+                Editar
               </ButtonSpinner>
             </DialogFooter>
           </form>

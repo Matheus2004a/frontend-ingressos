@@ -9,15 +9,15 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { cities } from '@/data/constantes.json'
-import { ControllerRenderProps, FieldValues } from 'react-hook-form'
 
-export function SelectCities({
-  field,
-}: {
-  field: ControllerRenderProps<FieldValues, 'location'>
-}) {
+interface SelectCitiesProps {
+  value: string
+  onChange(value: string): void
+}
+
+export function SelectCities({ value, onChange }: SelectCitiesProps) {
   return (
-    <Select onValueChange={field.onChange} defaultValue={field.value}>
+    <Select value={value} onValueChange={onChange}>
       <FormControl>
         <SelectTrigger>
           <SelectValue placeholder="Selecione o local do evento" />

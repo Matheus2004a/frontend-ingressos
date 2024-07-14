@@ -11,6 +11,10 @@ class EventsServices {
     return httpClient.post('/event/create', credentials)
   }
 
+  async update({ id, ...credentials }: Event) {
+    return httpClient.patch(`/event/update/${id}`, credentials)
+  }
+
   async remove(eventId: string) {
     return httpClient.delete(`/event/delete/${eventId}`)
   }

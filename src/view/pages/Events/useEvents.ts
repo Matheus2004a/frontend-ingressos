@@ -34,7 +34,7 @@ export default function useEvents() {
   )
 
   return {
-    events: eventsFiltered?.length > 0 ? eventsFiltered : data,
+    events: !eventsFiltered ? data : eventsFiltered,
     query,
     isError,
     error,

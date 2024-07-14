@@ -29,7 +29,7 @@ httpClient.interceptors.response.use(
       if (error.code === 'ERR_NETWORK') {
         throw new Error(error.message)
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       return Promise.reject(error)
     }
   },
