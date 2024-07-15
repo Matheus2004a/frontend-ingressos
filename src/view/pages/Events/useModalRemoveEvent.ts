@@ -4,14 +4,13 @@ import { toast } from '@/components/ui/use-toast'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export default function useModalRemoveEvent() {
-  const { user, signout } = useAuth()
+  const { user } = useAuth()
 
   const queryClient = useQueryClient()
   const { mutateAsync, isPending } = useMutation({
     mutationFn: async (eventId: string) => EventsServices.remove(eventId),
     onError: (error: Error) => {
       toast({ title: error.message || 'Erro interno', variant: 'destructive' })
-      signout()
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['events', user?.id] })

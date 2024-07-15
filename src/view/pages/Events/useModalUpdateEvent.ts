@@ -16,7 +16,7 @@ export default function useModalUpdateEvent(event: Event) {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const isFirstRender = useRef(true)
 
-  const { user, signout } = useAuth()
+  const { user } = useAuth()
   const form = useForm<TypeSchemaRegisterEvent>({
     resolver: zodResolver(schemaRegisterEvent),
     defaultValues: {
@@ -32,7 +32,6 @@ export default function useModalUpdateEvent(event: Event) {
     mutationFn: async (data: Event) => EventsServices.update(data),
     onError: (error: Error) => {
       toast({ title: error.message || 'Erro interno', variant: 'destructive' })
-      signout()
     },
     onSuccess: () => {
       form.reset()
