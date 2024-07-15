@@ -2,8 +2,8 @@ import { CreateEventRequest, Event } from '../entities/Event'
 import { httpClient } from './httpClient'
 
 class EventsServices {
-  async listAll(userId: string) {
-    const { data } = await httpClient.get<Event[]>(`/event/findAll/${userId}`)
+  async listAll() {
+    const { data } = await httpClient.get<Event[]>('/event/findAll')
     return data
   }
 

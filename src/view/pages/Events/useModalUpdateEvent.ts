@@ -35,7 +35,7 @@ export default function useModalUpdateEvent(event: Event) {
     },
     onSuccess: () => {
       form.reset()
-      queryClient.invalidateQueries({ queryKey: ['events', user?.id] })
+      queryClient.invalidateQueries({ queryKey: ['events'] })
       toast({ title: 'Evento atualizado com sucesso' })
       setIsDialogOpen(false)
     },

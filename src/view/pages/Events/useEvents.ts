@@ -12,8 +12,8 @@ export default function useEvents() {
   const query = searchParams.get('q')
 
   const { data, isError, error, isLoading } = useQuery({
-    queryKey: ['events', user?.id],
-    queryFn: async () => EventsServices.listAll(user?.id ?? ''),
+    queryKey: ['events'],
+    queryFn: async () => EventsServices.listAll(),
     enabled: !!user,
   })
 
