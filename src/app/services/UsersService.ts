@@ -1,4 +1,4 @@
-import { User } from '../contexts/AuthContext'
+import { User } from '../entities/User'
 import { httpClient } from './httpClient'
 
 class UsersService {

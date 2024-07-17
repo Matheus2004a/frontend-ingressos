@@ -12,6 +12,7 @@ import {
 import useModalRemoveEvent from '@/view/pages/Events/useModalRemoveEvent'
 import { Trash } from 'lucide-react'
 import { ButtonSpinner } from '../../../../components/ButtonSpinner'
+import useAuth from '@/app/hooks/useAuth'
 
 interface ModalRemoveEventProps {
   eventId: string
@@ -23,6 +24,11 @@ export function ModalRemoveEvent({
   eventName,
 }: ModalRemoveEventProps) {
   const { removeEvent, isPending } = useModalRemoveEvent()
+  const { isAdmin } = useAuth()
+
+  if (!isAdmin) {
+    return null
+  }
 
   return (
     <Dialog>

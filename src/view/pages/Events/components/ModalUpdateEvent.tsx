@@ -1,4 +1,5 @@
 import { Event } from '@/app/entities/Event'
+import useAuth from '@/app/hooks/useAuth'
 import { ButtonSpinner } from '@/components/ButtonSpinner'
 import { Button } from '@/components/ui/button'
 import {
@@ -27,6 +28,11 @@ import { SelectCities } from './SelectCities'
 export function ModalUpdateEvent({ event }: { event: Event }) {
   const { form, onSubmit, isLoading, isDialogOpen, setIsDialogOpen } =
     useModalUpdateEvent(event)
+  const { isAdmin } = useAuth()
+
+  if (!isAdmin) {
+    return null
+  }
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

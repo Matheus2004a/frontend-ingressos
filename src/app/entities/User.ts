@@ -1,3 +1,9 @@
+export interface User {
+  id: string
+  email: string
+  role: 'admin' | 'client'
+}
+
 export interface UserSigninRequest {
   email: string
   password: string
