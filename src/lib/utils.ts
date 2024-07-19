@@ -27,6 +27,15 @@ export function formatDateToDateTimeLocal(date: string) {
   return `${year}-${month}-${day}T${hours}:${minutes}`
 }
 
+export function currencyStringToNumber(value: string | number) {
+  if (typeof value === 'number') {
+    return value
+  }
+
+  const sanitizedString = value.replace(/\./g, '').replace(',', '.')
+  return Number(sanitizedString)
+}
+
 export function generateRandomPrice(
   min: number = 10,
   max: number = 100,

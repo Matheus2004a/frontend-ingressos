@@ -12,6 +12,7 @@ import { formatDate, generateRandomPrice } from '@/lib/utils'
 import { ModalRegisterEvent } from '@/view/pages/Events/components/ModalRegisterEvent'
 import { ModalRemoveEvent } from '@/view/pages/Events/components/ModalRemoveEvent'
 import { LogOut, MapPin, Search } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { ModalUpdateEvent } from './components/ModalUpdateEvent'
 import useEvents from './useEvents'
 
@@ -81,6 +82,10 @@ export default function EventList() {
             </CardFooter>
           </Card>
         ))}
+
+        <Link to="/tickets" className="text-blue-500">
+          Ver ingressos
+        </Link>
       </ul>
     </div>
   )

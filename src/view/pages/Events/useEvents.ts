@@ -11,7 +11,7 @@ export default function useEvents() {
 
   const query = searchParams.get('q')
 
-  const { data, isError, error, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['events'],
     queryFn: async () => EventsServices.listAll(),
     enabled: !!user,
@@ -36,8 +36,6 @@ export default function useEvents() {
   return {
     events: !eventsFiltered ? data : eventsFiltered,
     query,
-    isError,
-    error,
     isLoading,
     handleSearch,
   }

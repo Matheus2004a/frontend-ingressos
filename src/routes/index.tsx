@@ -1,7 +1,8 @@
+import Tickets from '@/view/pages/Tickets'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Events from '../view/pages/Events'
-import Signin from '../view/pages/Signin'
-import Signup from '../view/pages/Signup'
+import Events from '@/view/pages/Events'
+import Signin from '@/view/pages/Signin'
+import Signup from '@/view/pages/Signup'
 import PrivateRoutes from './auth'
 
 export function Router() {
@@ -13,6 +14,7 @@ export function Router() {
 
         <Route element={<PrivateRoutes />}>
           <Route path="/" element={<Events />} />
+          <Route path="/tickets" element={<Tickets />} />
         </Route>
       </Routes>
     </BrowserRouter>
