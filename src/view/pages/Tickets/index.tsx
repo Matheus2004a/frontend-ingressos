@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import { formatDate } from '@/lib/utils'
 import { ArrowLeft, Search } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { ModalRegisterTicket } from './components/ModalRegisterTicket'
+import { FormRegisterTicket } from './components/FormRegisterTicket'
 import useTickets from './useTickets'
 
 export default function Tickets() {
@@ -33,8 +33,9 @@ export default function Tickets() {
           />
           <Search className="w-4 h-4 absolute right-3" />
         </div>
-        <ModalRegisterTicket />
       </form>
+
+      <FormRegisterTicket />
 
       <ul className="flex flex-col gap-4">
         {tickets?.map((ticket) => (

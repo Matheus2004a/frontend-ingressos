@@ -1,13 +1,16 @@
+import { Event } from '@/app/entities/Event'
 import useAuth from '@/app/hooks/useAuth'
+import useEvent from '@/app/hooks/useEvent'
 import EventsServices from '@/app/services/EventsServices'
 import { useQuery } from '@tanstack/react-query'
 import { FormEvent } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 export default function useEvents() {
-  const { user } = useAuth()
+  const { user, signout } = useAuth()
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
+  const { handleEventSelected } = useEvent()
 
   const query = searchParams.get('q')
 
@@ -33,10 +36,17 @@ export default function useEvents() {
     event.name.toLowerCase().includes(query?.toLowerCase() ?? ''),
   )
 
+  function onEventSelected(event: Event) {
+    handleEventSelected(event)
+    navigate('/tickets')
+  }
+
   return {
     events: !eventsFiltered ? data : eventsFiltered,
     query,
     isLoading,
     handleSearch,
+    signout,
+    onEventSelected,
   }
 }

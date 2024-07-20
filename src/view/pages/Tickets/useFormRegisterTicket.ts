@@ -1,4 +1,5 @@
 import { Ticket } from '@/app/entities/Ticket'
+import useEvent from '@/app/hooks/useEvent'
 import TicketServices from '@/app/services/TicketServices'
 import {
   schemaRegisterTicket,
@@ -8,12 +9,10 @@ import { toast } from '@/components/ui/use-toast'
 import { currencyStringToNumber } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-export default function useModalRegisterTicket() {
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const isFirstRender = useRef(true)
+export default function useFormRegisterTicket() {
+  const { eventSelected } = useEvent()
 
   const form = useForm<TypeSchemaRegisterTicket>({
     resolver: zodResolver(schemaRegisterTicket),
@@ -29,24 +28,13 @@ export default function useModalRegisterTicket() {
       form.reset()
       queryClient.invalidateQueries({ queryKey: ['tickets'] })
       toast({ title: 'Ticket cadastrado com sucesso' })
-      setIsDialogOpen(false)
     },
   })
 
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false
-      return
-    }
-
-    if (!isDialogOpen && !form.formState.isValid) {
-      form.clearErrors()
-    }
-  }, [form, isDialogOpen])
-
   async function onSubmit(values: Ticket) {
-    const payload: Ticket = {
-      ...values,
+    const payload = {
+      eventId: eventSelected?.id,
+      type: values.type,
       price: currencyStringToNumber(values.price),
       qtTicket: currencyStringToNumber(values.qtTicket),
       dtAvailability: new Date(values.dtAvailability).toISOString(),
@@ -59,7 +47,6 @@ export default function useModalRegisterTicket() {
     form,
     onSubmit,
     isLoading: isPending,
-    isDialogOpen,
-    setIsDialogOpen,
+    eventSelected,
   }
 }

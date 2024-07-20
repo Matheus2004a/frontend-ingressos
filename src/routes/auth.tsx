@@ -1,3 +1,4 @@
+import { EventProvider } from '@/app/contexts/EventContext'
 import { Navigate, Outlet } from 'react-router-dom'
 import useAuth from '../app/hooks/useAuth'
 
@@ -8,5 +9,9 @@ export default function PrivateRoutes() {
     return <Navigate to="/signin" replace />
   }
 
-  return <Outlet />
+  return (
+    <EventProvider>
+      <Outlet />
+    </EventProvider>
+  )
 }

@@ -4,7 +4,7 @@ enum TicketType {
 }
 
 export interface Ticket {
-  eventId: string
+  eventId?: string
   ownerId?: string
   type: TicketType
   price: number

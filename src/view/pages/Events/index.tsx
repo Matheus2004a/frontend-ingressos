@@ -1,4 +1,3 @@
-import useAuth from '@/app/hooks/useAuth'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -11,14 +10,13 @@ import { Input } from '@/components/ui/input'
 import { formatDate, generateRandomPrice } from '@/lib/utils'
 import { ModalRegisterEvent } from '@/view/pages/Events/components/ModalRegisterEvent'
 import { ModalRemoveEvent } from '@/view/pages/Events/components/ModalRemoveEvent'
-import { LogOut, MapPin, Search } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { LogOut, MapPin, Search, TicketCheck } from 'lucide-react'
 import { ModalUpdateEvent } from './components/ModalUpdateEvent'
 import useEvents from './useEvents'
 
 export default function EventList() {
-  const { signout } = useAuth()
-  const { events, isLoading, handleSearch, query } = useEvents()
+  const { events, isLoading, handleSearch, query, signout, onEventSelected } =
+    useEvents()
 
   if (isLoading) {
     return <p>Carregando eventos...</p>
@@ -60,6 +58,9 @@ export default function EventList() {
               <CardTitle>{event.name}</CardTitle>
 
               <div className="flex items-center">
+                <Button variant="ghost" onClick={() => onEventSelected(event)}>
+                  <TicketCheck />
+                </Button>
                 <ModalUpdateEvent event={event} />
                 <ModalRemoveEvent eventId={event.id} eventName={event.name} />
               </div>
@@ -82,10 +83,6 @@ export default function EventList() {
             </CardFooter>
           </Card>
         ))}
-
-        <Link to="/tickets" className="text-blue-500">
-          Ver ingressos
-        </Link>
       </ul>
     </div>
   )

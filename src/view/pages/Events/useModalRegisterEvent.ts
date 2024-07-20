@@ -1,7 +1,9 @@
+import useEvent from '@/app/hooks/useEvent'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { CreateEventRequest } from '../../../app/entities/Event'
 import useAuth from '../../../app/hooks/useAuth'
 import EventsServices from '../../../app/services/EventsServices'
@@ -16,6 +18,9 @@ export default function useModalRegisterEvent() {
   const isFirstRender = useRef(true)
 
   const { user } = useAuth()
+  const { handleEventSelected } = useEvent()
+
+  const navigate = useNavigate()
   const form = useForm<TypeSchemaRegisterEvent>({
     resolver: zodResolver(schemaRegisterEvent),
   })
@@ -26,11 +31,13 @@ export default function useModalRegisterEvent() {
     onError: (error: Error) => {
       toast({ title: error.message || 'Erro interno', variant: 'destructive' })
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       form.reset()
       queryClient.invalidateQueries({ queryKey: ['events'] })
       toast({ title: 'Evento cadastrado com sucesso' })
       setIsDialogOpen(false)
+      navigate('/tickets')
+      handleEventSelected(data)
     },
   })
 
