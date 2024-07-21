@@ -31,13 +31,13 @@ export default function useModalRegisterEvent() {
     onError: (error: Error) => {
       toast({ title: error.message || 'Erro interno', variant: 'destructive' })
     },
-    onSuccess: (data) => {
+    onSuccess: ({ data }) => {
       form.reset()
       queryClient.invalidateQueries({ queryKey: ['events'] })
       toast({ title: 'Evento cadastrado com sucesso' })
       setIsDialogOpen(false)
-      navigate('/tickets')
       handleEventSelected(data)
+      navigate('/tickets')
     },
   })
 

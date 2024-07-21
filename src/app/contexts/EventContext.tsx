@@ -3,7 +3,7 @@ import { Event } from '../entities/Event'
 
 interface EventContextProps {
   eventSelected: Event | null
-  handleEventSelected(Event: Event): void
+  handleEventSelected(event: Event): void
 }
 
 export const EventContext = createContext({} as EventContextProps)
