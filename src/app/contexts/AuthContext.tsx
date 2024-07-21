@@ -21,24 +21,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return !!storedAccessToken
   })
 
-  const { data, isError, isFetched, refetch } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['user', 'me'],
     queryFn: async () => UsersService.me(),
     enabled: signedIn,
-    staleTime: Infinity,
   })
-
-  const [isAdmin, setIsAdmin] = useState(false)
-
-  const isAllowed = data?.role === 'admin' && signedIn
-
-  useEffect(() => {
-    setIsAdmin(isFetched && isAllowed)
-
-    if (signedIn && isFetched) {
-      refetch()
-    }
-  }, [isAllowed, signedIn, isFetched, refetch])
 
   const signin = useCallback((accessToken: string) => {
     localStorage.setItem(storage.ACCESS_TOKEN, accessToken)
@@ -62,7 +49,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider
       value={{
         user: data,
-        isAdmin,
+        isAdmin: data?.role === 'admin',
         signedIn,
         signin,
         signout,
