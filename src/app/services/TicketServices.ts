@@ -1,9 +1,11 @@
-import { Ticket } from '../entities/Ticket'
+import { Ticket, TicketsResponse } from '../entities/Ticket'
 import { httpClient } from './httpClient'
 
 class TicketServices {
-  async listAll(eventId: string): Promise<Ticket[]> {
-    const { data } = await httpClient.get(`/ticket/findAll/${eventId}`)
+  async listAll(eventId: string) {
+    const { data } = await httpClient.get<TicketsResponse[]>(
+      `/ticket/findAll/${eventId}`,
+    )
     return data
   }
 

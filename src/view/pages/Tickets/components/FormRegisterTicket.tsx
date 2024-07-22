@@ -35,7 +35,12 @@ export function FormRegisterTicket() {
               <FormItem>
                 <FormLabel>Nome do evento</FormLabel>
                 <FormControl>
-                  <Input type="text" disabled {...field} />
+                  <Input
+                    type="text"
+                    disabled
+                    className="w-[250px] text-ellipsis"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

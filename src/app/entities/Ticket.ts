@@ -11,3 +11,13 @@ export interface Ticket {
   qtTicket: number
   dtAvailability: string
 }
+
+export interface TicketsResponse {
+  id: string
+  eventId: string
+  ownerId: string | undefined
+  type: TicketType
+  price: number
+  qtTicket: number
+  dtAvailability: string
+}

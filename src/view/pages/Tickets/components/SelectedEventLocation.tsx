@@ -10,7 +10,7 @@ import {
 export function SelectedEventLocation({ value }: { value: string }) {
   return (
     <Select value={value} disabled>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-[250px]">
         <SelectValue placeholder="Select a fruit" />
       </SelectTrigger>
       <SelectContent>

@@ -7,7 +7,8 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { formatDate, generateRandomPrice } from '@/lib/utils'
+import { formatDate } from '@/lib/utils'
+import { CardTicket } from '@/view/pages/Events/components/CardTickets'
 import { ModalRegisterEvent } from '@/view/pages/Events/components/ModalRegisterEvent'
 import { ModalRemoveEvent } from '@/view/pages/Events/components/ModalRemoveEvent'
 import { LogOut, MapPin, Search, TicketCheck } from 'lucide-react'
@@ -51,7 +52,7 @@ export default function EventList() {
         <ModalRegisterEvent />
       </form>
 
-      <ul className="flex flex-col gap-4">
+      <section className="flex flex-col gap-4">
         {events?.map((event) => (
           <Card key={event.id} className="min-w-[350px]">
             <CardHeader className="flex flex-row justify-between items-center">
@@ -79,11 +80,11 @@ export default function EventList() {
               </small>
             </CardContent>
             <CardFooter>
-              <span className="font-bold">{generateRandomPrice(10, 100)}</span>
+              <CardTicket event={event} />
             </CardFooter>
           </Card>
         ))}
-      </ul>
+      </section>
     </div>
   )
 }

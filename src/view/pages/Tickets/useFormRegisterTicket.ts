@@ -32,7 +32,7 @@ export default function useFormRegisterTicket() {
   })
 
   async function onSubmit(values: Ticket) {
-    const payload = {
+    const payload: Ticket = {
       eventId: eventSelected?.id,
       type: values.type,
       price: currencyStringToNumber(values.price),

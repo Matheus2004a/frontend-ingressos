@@ -4,13 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import useAuth from '../../../app/hooks/useAuth'
-import EventsServices from '../../../app/services/EventsServices'
+import useAuth from '@/app/hooks/useAuth'
+import EventsServices from '@/app/services/EventsServices'
 import {
   schemaRegisterEvent,
   TypeSchemaRegisterEvent,
-} from '../../../app/validations/schemaRegisterEvent'
-import { toast } from '../../../components/ui/use-toast'
+} from '@/app/validations/schemaRegisterEvent'
+import { toast } from '@/components/ui/use-toast'
 
 export default function useModalUpdateEvent(event: Event) {
   const [isDialogOpen, setIsDialogOpen] = useState(false)

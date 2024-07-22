@@ -4,14 +4,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { CreateEventRequest } from '../../../app/entities/Event'
-import useAuth from '../../../app/hooks/useAuth'
-import EventsServices from '../../../app/services/EventsServices'
+import { CreateEventRequest } from '@/app/entities/Event'
+import useAuth from '@/app/hooks/useAuth'
+import EventsServices from '@/app/services/EventsServices'
 import {
   schemaRegisterEvent,
   TypeSchemaRegisterEvent,
-} from '../../../app/validations/schemaRegisterEvent'
-import { toast } from '../../../components/ui/use-toast'
+} from '@/app/validations/schemaRegisterEvent'
+import { toast } from '@/components/ui/use-toast'
 
 export default function useModalRegisterEvent() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)

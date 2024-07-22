@@ -1,3 +1,5 @@
+import useAuth from '@/app/hooks/useAuth'
+import { ButtonSpinner } from '@/components/ButtonSpinner'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -11,8 +13,6 @@ import {
 } from '@/components/ui/dialog'
 import useModalRemoveEvent from '@/view/pages/Events/useModalRemoveEvent'
 import { Trash } from 'lucide-react'
-import { ButtonSpinner } from '../../../../components/ButtonSpinner'
-import useAuth from '@/app/hooks/useAuth'
 
 interface ModalRemoveEventProps {
   eventId: string
