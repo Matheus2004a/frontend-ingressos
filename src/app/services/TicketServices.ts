@@ -4,7 +4,7 @@ import { httpClient } from './httpClient'
 class TicketServices {
   async listAll(eventId: string) {
     const { data } = await httpClient.get<TicketsResponse[]>(
-      `/ticket/findAll/${eventId}`,
+      `/controlleTicket/find/${eventId}`,
     )
     return data
   }

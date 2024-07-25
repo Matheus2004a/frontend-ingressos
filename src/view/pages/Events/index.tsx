@@ -8,10 +8,10 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { formatDate } from '@/lib/utils'
-import { CardTicket } from '@/view/pages/Events/components/CardTickets'
 import { ModalRegisterEvent } from '@/view/pages/Events/components/ModalRegisterEvent'
 import { ModalRemoveEvent } from '@/view/pages/Events/components/ModalRemoveEvent'
 import { LogOut, MapPin, Search, TicketCheck } from 'lucide-react'
+import { ModalConfirmationSaleTicket } from './components/ModalConfirmationSaleTicket'
 import { ModalUpdateEvent } from './components/ModalUpdateEvent'
 import useEvents from './useEvents'
 
@@ -80,7 +80,7 @@ export default function EventList() {
               </small>
             </CardContent>
             <CardFooter>
-              <CardTicket event={event} />
+              <ModalConfirmationSaleTicket event={event} />
             </CardFooter>
           </Card>
         ))}

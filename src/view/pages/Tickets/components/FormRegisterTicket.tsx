@@ -11,12 +11,12 @@ import {
 import { Input } from '@/components/ui/input'
 import { formatDateToDateTimeLocal } from '@/lib/utils'
 import { Link, Navigate } from 'react-router-dom'
-import useRegisterTicket from '../useFormRegisterTicket'
+import useFormRegisterTicket from '../useFormRegisterTicket'
 import { SelectTypeTicket } from './SelectTypeTicket'
 import { SelectedEventLocation } from './SelectedEventLocation'
 
 export function FormRegisterTicket() {
-  const { form, onSubmit, isLoading, eventSelected } = useRegisterTicket()
+  const { form, onSubmit, isLoading, eventSelected } = useFormRegisterTicket()
 
   if (!eventSelected) {
     return <Navigate to="/" replace />

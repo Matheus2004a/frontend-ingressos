@@ -14,10 +14,8 @@ export interface Ticket {
 
 export interface TicketsResponse {
   id: string
-  eventId: string
-  ownerId: string | undefined
+  qtTicket: number
   type: TicketType
   price: number
-  qtTicket: number
-  dtAvailability: string
+  eventId: string
 }
