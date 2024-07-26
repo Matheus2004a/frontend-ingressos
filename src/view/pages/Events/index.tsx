@@ -11,6 +11,7 @@ import { formatDate } from '@/lib/utils'
 import { ModalRegisterEvent } from '@/view/pages/Events/components/ModalRegisterEvent'
 import { ModalRemoveEvent } from '@/view/pages/Events/components/ModalRemoveEvent'
 import { LogOut, MapPin, Search, TicketCheck } from 'lucide-react'
+import { CardTicket } from './components/CardTickets'
 import { ModalConfirmationSaleTicket } from './components/ModalConfirmationSaleTicket'
 import { ModalUpdateEvent } from './components/ModalUpdateEvent'
 import useEvents from './useEvents'
@@ -80,7 +81,11 @@ export default function EventList() {
               </small>
             </CardContent>
             <CardFooter>
-              <ModalConfirmationSaleTicket event={event} />
+              <ModalConfirmationSaleTicket>
+                <div className="flex flex-wrap gap-4 cursor-pointer">
+                  <CardTicket event={event} />
+                </div>
+              </ModalConfirmationSaleTicket>
             </CardFooter>
           </Card>
         ))}

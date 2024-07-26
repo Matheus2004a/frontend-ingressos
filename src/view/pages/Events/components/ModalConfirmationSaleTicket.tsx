@@ -1,4 +1,3 @@
-import { Event } from '@/app/entities/Event'
 import { ButtonSpinner } from '@/components/ButtonSpinner'
 import { Button } from '@/components/ui/button'
 import {
@@ -21,28 +20,18 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import useModalConfirmationSaleTicket from '../useModalConfirmationSaleTicket'
-import { CardTicket } from './CardTickets'
 
-export function ModalConfirmationSaleTicket({ event }: { event: Event }) {
-  const {
-    form,
-    onSubmit,
-    isPending,
-    handleTicketIdSelected,
-    isDialogOpen,
-    setIsDialogOpen,
-  } = useModalConfirmationSaleTicket()
+export function ModalConfirmationSaleTicket({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const { form, onSubmit, isPending, isDialogOpen, setIsDialogOpen } =
+    useModalConfirmationSaleTicket()
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <DialogTrigger asChild>
-        <div className="flex flex-wrap gap-4 cursor-pointer">
-          <CardTicket
-            event={event}
-            onSelectedTicketId={handleTicketIdSelected}
-          />
-        </div>
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[550px]">
         <DialogHeader>
           <DialogTitle>Cadastrar venda</DialogTitle>
@@ -56,7 +45,7 @@ export function ModalConfirmationSaleTicket({ event }: { event: Event }) {
             <FormField
               control={form.control}
               name="amountTotal"
-              defaultValue=""
+              defaultValue={1}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Quantidade de ingresso</FormLabel>
@@ -64,6 +53,7 @@ export function ModalConfirmationSaleTicket({ event }: { event: Event }) {
                     <Input
                       type="number"
                       placeholder="Digite a quantidade de ingresso que deseja comprar"
+                      disabled
                       {...field}
                     />
                   </FormControl>

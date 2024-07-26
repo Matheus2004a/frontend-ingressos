@@ -9,6 +9,13 @@ class TicketServices {
     return data
   }
 
+  async listAllTicketsByType(eventId: string, type: 'VIP' | 'PISTA') {
+    const { data } = await httpClient.get<TicketsResponse[]>(
+      `/ticket/findAll/${eventId}/${type}`,
+    )
+    return data
+  }
+
   async create(credentials: Ticket) {
     return httpClient.post('/ticket/create', credentials)
   }
