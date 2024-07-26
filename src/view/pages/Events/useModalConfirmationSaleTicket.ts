@@ -24,11 +24,11 @@ export default function useModalConfirmationSaleTicket() {
   })
 
   const { data: ticketsByEventId } = useQuery({
-    queryKey: ['tickets', 'adb0a022-0f42-4849-bfad-47f4102e5a8d', 'PISTA'],
+    queryKey: ['tickets', 'adb0a022-0f42-4849-bfad-47f4102e5a8d', 'VIP'],
     queryFn: () =>
       TicketServices.listAllTicketsByType(
         'adb0a022-0f42-4849-bfad-47f4102e5a8d',
-        'PISTA',
+        'VIP',
       ),
   })
 
@@ -36,8 +36,7 @@ export default function useModalConfirmationSaleTicket() {
     mutationFn: async (data: CreateSaleTicketRequest) =>
       SaleService.create(data),
     onSuccess: () => {
-      form.reset()
-      toast({ title: 'Evento cadastrado com sucesso' })
+      toast({ title: 'Venda de ingresso cadastrada com sucesso' })
       setIsDialogOpen(false)
     },
     onError: (error: Error) => {

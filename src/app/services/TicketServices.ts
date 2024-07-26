@@ -11,7 +11,7 @@ class TicketServices {
 
   async listAllTicketsByType(eventId: string, type: 'VIP' | 'PISTA') {
     const { data } = await httpClient.get<TicketsResponse[]>(
-      `/ticket/findAll/${eventId}/${type}`,
+      `/ticket/findAll/${eventId}/?type=${type}`,
     )
     return data
   }
