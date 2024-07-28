@@ -27,70 +27,48 @@ export function FormRegisterTicket() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <h3 className="text-lg font-semibold">Informações do evento</h3>
         <div className="flex items-center gap-2">
-          <FormField
-            control={form.control}
-            name="name"
-            defaultValue={eventSelected.name}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nome do evento</FormLabel>
-                <FormControl>
-                  <Input
-                    type="text"
-                    disabled
-                    className="w-[250px] text-ellipsis"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <FormItem>
+            <FormLabel>Nome do evento</FormLabel>
+            <FormControl>
+              <Input
+                type="text"
+                disabled
+                className="w-[250px] text-ellipsis"
+                defaultValue={eventSelected.name}
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
 
-          <FormField
-            control={form.control}
-            name="location"
-            defaultValue={eventSelected.location}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Local do evento</FormLabel>
-                <FormControl>
-                  <SelectedEventLocation value={field.value} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <FormItem>
+            <FormLabel>Local do evento</FormLabel>
+            <FormControl>
+              <SelectedEventLocation value={eventSelected.location} />
+            </FormControl>
+          </FormItem>
 
-          <FormField
-            control={form.control}
-            name="dtStart"
-            defaultValue={formatDateToDateTimeLocal(eventSelected.dtStart)}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Data de início</FormLabel>
-                <FormControl>
-                  <Input type="datetime-local" disabled {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <FormItem>
+            <FormLabel>Data de início</FormLabel>
+            <FormControl>
+              <Input
+                type="datetime-local"
+                defaultValue={formatDateToDateTimeLocal(eventSelected.dtStart)}
+                disabled
+              />
+            </FormControl>
+          </FormItem>
 
-          <FormField
-            control={form.control}
-            name="dtEnd"
-            defaultValue={formatDateToDateTimeLocal(eventSelected.dtEnd)}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Data de término</FormLabel>
-                <FormControl>
-                  <Input type="datetime-local" disabled {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <FormItem>
+            <FormLabel>Data de término</FormLabel>
+            <FormControl>
+              <Input
+                type="datetime-local"
+                defaultValue={formatDateToDateTimeLocal(eventSelected.dtEnd)}
+                disabled
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
         </div>
 
         <h3 className="font-semibold">

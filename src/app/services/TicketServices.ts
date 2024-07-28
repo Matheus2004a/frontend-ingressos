@@ -1,4 +1,4 @@
-import { Ticket, TicketsResponse } from '../entities/Ticket'
+import { CreateTicketRequest, TicketsResponse } from '../entities/Ticket'
 import { httpClient } from './httpClient'
 
 class TicketServices {
@@ -9,14 +9,7 @@ class TicketServices {
     return data
   }
 
-  async listAllTicketsByType(eventId: string, type: 'VIP' | 'PISTA') {
-    const { data } = await httpClient.get<TicketsResponse[]>(
-      `/ticket/findAll/${eventId}/?type=${type}`,
-    )
-    return data
-  }
-
-  async create(credentials: Ticket) {
+  async create(credentials: CreateTicketRequest) {
     return httpClient.post('/ticket/create', credentials)
   }
 }

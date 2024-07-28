@@ -1,4 +1,4 @@
-import { Ticket } from '@/app/entities/Ticket'
+import { CreateTicketRequest } from '@/app/entities/Ticket'
 import useEvent from '@/app/hooks/useEvent'
 import TicketServices from '@/app/services/TicketServices'
 import {
@@ -20,7 +20,8 @@ export default function useFormRegisterTicket() {
 
   const queryClient = useQueryClient()
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: async (data: Ticket) => TicketServices.create(data),
+    mutationFn: async (data: CreateTicketRequest) =>
+      TicketServices.create(data),
     onError: (error: Error) => {
       toast({ title: error.message || 'Erro interno', variant: 'destructive' })
     },
@@ -31,7 +32,7 @@ export default function useFormRegisterTicket() {
     },
   })
 
-  async function onSubmit(values: Ticket) {
+  async function onSubmit(values: CreateTicketRequest) {
     const payload = {
       eventId: eventSelected?.id,
       type: values.type,

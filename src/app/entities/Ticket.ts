@@ -12,6 +12,14 @@ export interface Ticket {
   dtAvailability: string
 }
 
+export interface CreateTicketRequest {
+  eventId?: string
+  type: 'PISTA' | 'VIP'
+  price: string | number
+  qtTicket: string | number
+  dtAvailability: string
+}
+
 export interface TicketsResponse {
   id: string
   qtTicket: number
