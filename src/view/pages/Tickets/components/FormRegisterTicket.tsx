@@ -26,14 +26,14 @@ export function FormRegisterTicket() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <h3 className="text-lg font-semibold">Informações do evento</h3>
-        <div className="flex items-center gap-2">
+        <div className="grid md:flex items-center gap-2">
           <FormItem>
             <FormLabel>Nome do evento</FormLabel>
             <FormControl>
               <Input
                 type="text"
                 disabled
-                className="w-[250px] text-ellipsis"
+                className="w-full md:min-w-[250px] text-ellipsis"
                 defaultValue={eventSelected.name}
               />
             </FormControl>

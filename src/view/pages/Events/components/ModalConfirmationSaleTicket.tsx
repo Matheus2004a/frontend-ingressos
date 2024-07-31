@@ -69,7 +69,7 @@ export function ModalConfirmationSaleTicket({
                 </Button>
               </DialogClose>
               <ButtonSpinner type="submit" isLoading={isPending}>
-                Cadastrar
+                Comprar
               </ButtonSpinner>
             </DialogFooter>
           </form>

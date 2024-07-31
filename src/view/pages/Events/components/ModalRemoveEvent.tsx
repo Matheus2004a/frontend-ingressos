@@ -1,3 +1,4 @@
+import { Event } from '@/app/entities/Event'
 import useAuth from '@/app/hooks/useAuth'
 import { ButtonSpinner } from '@/components/ButtonSpinner'
 import { Button } from '@/components/ui/button'
@@ -14,15 +15,7 @@ import {
 import useModalRemoveEvent from '@/view/pages/Events/useModalRemoveEvent'
 import { Trash } from 'lucide-react'
 
-interface ModalRemoveEventProps {
-  eventId: string
-  eventName: string
-}
-
-export function ModalRemoveEvent({
-  eventId,
-  eventName,
-}: ModalRemoveEventProps) {
+export function ModalRemoveEvent({ event }: { event: Event }) {
   const { removeEvent, isPending } = useModalRemoveEvent()
   const { isAdmin } = useAuth()
 
@@ -41,8 +34,8 @@ export function ModalRemoveEvent({
         <DialogHeader>
           <DialogTitle>Remoção de evento</DialogTitle>
           <DialogDescription>
-            Tem certeza que deseja deletar o evento <strong>{eventName}</strong>
-            ?
+            Tem certeza que deseja deletar o evento{' '}
+            <strong>{event.name}</strong>?
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -51,7 +44,7 @@ export function ModalRemoveEvent({
           </DialogClose>
           <ButtonSpinner
             isLoading={isPending}
-            onClick={() => removeEvent(eventId)}
+            onClick={() => removeEvent(event.id)}
           >
             Sim
           </ButtonSpinner>

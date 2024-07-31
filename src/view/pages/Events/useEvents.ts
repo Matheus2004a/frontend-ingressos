@@ -7,7 +7,7 @@ import { FormEvent } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 export default function useEvents() {
-  const { user, signout } = useAuth()
+  const { user, signout, isAdmin } = useAuth()
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const { handleEventSelected } = useEvent()
@@ -48,5 +48,6 @@ export default function useEvents() {
     handleSearch,
     signout,
     onEventSelected,
+    isAdmin,
   }
 }

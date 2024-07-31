@@ -17,8 +17,15 @@ import { ModalUpdateEvent } from './components/ModalUpdateEvent'
 import useEvents from './useEvents'
 
 export default function EventList() {
-  const { events, isLoading, handleSearch, query, signout, onEventSelected } =
-    useEvents()
+  const {
+    events,
+    isLoading,
+    handleSearch,
+    query,
+    signout,
+    onEventSelected,
+    isAdmin,
+  } = useEvents()
 
   if (isLoading) {
     return <p>Carregando eventos...</p>
@@ -60,11 +67,16 @@ export default function EventList() {
               <CardTitle>{event.name}</CardTitle>
 
               <div className="flex items-center">
-                <Button variant="ghost" onClick={() => onEventSelected(event)}>
-                  <TicketCheck />
-                </Button>
+                {isAdmin && (
+                  <Button
+                    variant="ghost"
+                    onClick={() => onEventSelected(event)}
+                  >
+                    <TicketCheck />
+                  </Button>
+                )}
                 <ModalUpdateEvent event={event} />
-                <ModalRemoveEvent eventId={event.id} eventName={event.name} />
+                <ModalRemoveEvent event={event} />
               </div>
             </CardHeader>
             <CardContent>
