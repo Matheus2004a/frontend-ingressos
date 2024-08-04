@@ -93,7 +93,7 @@ export default function EventList() {
               </small>
             </CardContent>
             <CardFooter>
-              <ModalConfirmationSaleTicket>
+              <ModalConfirmationSaleTicket event={event}>
                 <div className="flex flex-wrap gap-4 cursor-pointer">
                   <CardTicket event={event} />
                 </div>

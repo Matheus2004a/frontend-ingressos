@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card'
 import useTickets from '@/view/pages/Tickets/useTickets'
 
 export function CardTicket({ event }: { event: Event }) {
-  const { tickets, isLoading } = useTickets(event)
+  const { tickets, isLoading, handleTicketTypeSelected } = useTickets(event)
 
   if (isLoading) {
     return <p>Carregando ingressos...</p>
@@ -15,7 +15,11 @@ export function CardTicket({ event }: { event: Event }) {
   }
 
   return tickets?.map((ticket) => (
-    <Card key={ticket.id} className="w-full md:w-3/5 p-4">
+    <Card
+      key={ticket.id}
+      className="w-full md:w-3/5 p-4"
+      onClick={() => handleTicketTypeSelected(ticket.type)}
+    >
       <div className="flex justify-between items-center gap-4">
         <p className="font-bold">Tipo: {ticket.type}</p>
         <Badge color="primary">{ticket.qtTicket} disponíveis</Badge>

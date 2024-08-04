@@ -1,3 +1,4 @@
+import { Event } from '@/app/entities/Event'
 import { CreateSaleTicketRequest } from '@/app/entities/Sale'
 import useAuth from '@/app/hooks/useAuth'
 import SaleService from '@/app/services/SaleService'
@@ -11,12 +12,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import useTickets from '../Tickets/useTickets'
 
-export default function useModalConfirmationSaleTicket() {
+export default function useModalConfirmationSaleTicket(event: Event) {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const isFirstRender = useRef(true)
 
   const { user } = useAuth()
+  const { ticketsByEvent } = useTickets(event)
 
   const form = useForm<TypeSchemaRegisterSale>({
     resolver: zodResolver(schemaRegisterSale),
@@ -47,7 +50,7 @@ export default function useModalConfirmationSaleTicket() {
 
   async function onSubmit() {
     await mutateAsync({
-      ticketId: '1',
+      ticketId: ticketsByEvent!.id,
       userId: user!.id,
       amountTotal: currencyStringToNumber(form.getValues().amountTotal),
     })

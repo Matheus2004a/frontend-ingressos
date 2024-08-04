@@ -1,4 +1,5 @@
 import { Event } from '@/app/entities/Event'
+import useEvent from '@/app/hooks/useEvent'
 import TicketServices from '@/app/services/TicketServices'
 import { useQuery } from '@tanstack/react-query'
 
@@ -8,8 +9,20 @@ export default function useTickets(event: Event) {
     queryFn: async () => TicketServices.listAll(event.id),
   })
 
+  const { handleTicketTypeSelected } = useEvent()
+
+  const { data: ticketsByEvent, isPending: isLoadingTicketsByEvent } = useQuery(
+    {
+      queryKey: ['controlleTicket', event.id, 'PISTA'],
+      queryFn: async () => TicketServices.listAllByEventId(event.id, 'PISTA'),
+    },
+  )
+
   return {
     tickets: data ?? [],
     isLoading: isPending,
+    ticketsByEvent,
+    isLoadingTicketsByEvent,
+    handleTicketTypeSelected,
   }
 }

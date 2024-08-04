@@ -1,3 +1,4 @@
+import { Event } from '@/app/entities/Event'
 import { ButtonSpinner } from '@/components/ButtonSpinner'
 import { Button } from '@/components/ui/button'
 import {
@@ -22,12 +23,14 @@ import { Input } from '@/components/ui/input'
 import useModalConfirmationSaleTicket from '../useModalConfirmationSaleTicket'
 
 export function ModalConfirmationSaleTicket({
+  event,
   children,
 }: {
+  event: Event
   children: React.ReactNode
 }) {
   const { form, onSubmit, isPending, isDialogOpen, setIsDialogOpen } =
-    useModalConfirmationSaleTicket()
+    useModalConfirmationSaleTicket(event)
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

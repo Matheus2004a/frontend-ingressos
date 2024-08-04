@@ -12,6 +12,11 @@ export interface Ticket {
   dtAvailability: string
 }
 
+export interface TicketListByEventId {
+  eventId: string
+  type: TicketType
+}
+
 export interface CreateTicketRequest {
   eventId?: string
   type: 'PISTA' | 'VIP'
