@@ -9,12 +9,14 @@ export default function useTickets(event: Event) {
     queryFn: async () => TicketServices.listAll(event.id),
   })
 
-  const { handleTicketTypeSelected } = useEvent()
+  const { ticketTypeSelected, handleTicketTypeSelected } = useEvent()
 
   const { data: ticketsByEvent, isPending: isLoadingTicketsByEvent } = useQuery(
     {
-      queryKey: ['controlleTicket', event.id, 'PISTA'],
-      queryFn: async () => TicketServices.listAllByEventId(event.id, 'PISTA'),
+      queryKey: ['controlleTicket', event.id, ticketTypeSelected],
+      queryFn: async () =>
+        TicketServices.listAllByEventId(event.id, ticketTypeSelected!),
+      enabled: !!ticketTypeSelected,
     },
   )
 
