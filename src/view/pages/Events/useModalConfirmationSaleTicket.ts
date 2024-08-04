@@ -9,7 +9,7 @@ import {
 import { toast } from '@/components/ui/use-toast'
 import { currencyStringToNumber } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import useTickets from '../Tickets/useTickets'
@@ -25,10 +25,12 @@ export default function useModalConfirmationSaleTicket(event: Event) {
     resolver: zodResolver(schemaRegisterSale),
   })
 
+  const queryClient = useQueryClient()
   const { mutateAsync, isPending } = useMutation({
     mutationFn: async (data: CreateSaleTicketRequest) =>
       SaleService.create(data),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tickets', event.id] })
       toast({ title: 'Venda de ingresso cadastrada com sucesso' })
       setIsDialogOpen(false)
     },
