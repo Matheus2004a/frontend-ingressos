@@ -10,6 +10,7 @@ import { currencyStringToNumber } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 export default function useFormRegisterTicket() {
   const { eventSelected } = useEvent()
@@ -17,6 +18,8 @@ export default function useFormRegisterTicket() {
   const form = useForm<TypeSchemaRegisterTicket>({
     resolver: zodResolver(schemaRegisterTicket),
   })
+
+  const navigate = useNavigate()
 
   const queryClient = useQueryClient()
   const { mutateAsync, isPending } = useMutation({
@@ -27,6 +30,7 @@ export default function useFormRegisterTicket() {
     },
     onSuccess: () => {
       form.reset()
+      navigate('/')
       queryClient.invalidateQueries({ queryKey: ['tickets'] })
       toast({ title: 'Ticket cadastrado com sucesso' })
     },
