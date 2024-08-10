@@ -1,23 +1,23 @@
-import useEvent from '@/app/hooks/useEvent'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 import { CreateEventRequest } from '@/app/entities/Event'
 import useAuth from '@/app/hooks/useAuth'
+import useEvent from '@/app/hooks/useEvent'
 import EventsServices from '@/app/services/EventsServices'
 import {
   schemaRegisterEvent,
   TypeSchemaRegisterEvent,
 } from '@/app/validations/schemaRegisterEvent'
 import { toast } from '@/components/ui/use-toast'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 export default function useModalRegisterEvent() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const isFirstRender = useRef(true)
 
-  const { user } = useAuth()
+  const { user, isAdmin } = useAuth()
   const { handleEventSelected } = useEvent()
 
   const navigate = useNavigate()
@@ -77,5 +77,6 @@ export default function useModalRegisterEvent() {
     isLoading: isPending,
     isDialogOpen,
     setIsDialogOpen,
+    isAdmin,
   }
 }

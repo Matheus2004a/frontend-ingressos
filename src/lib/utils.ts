@@ -36,7 +36,7 @@ export function currencyStringToNumber(value: string | number) {
   return Number(sanitizedString)
 }
 
-export function formatPrice(price: number): string {
+export function formatPrice(price: number) {
   return price.toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL',

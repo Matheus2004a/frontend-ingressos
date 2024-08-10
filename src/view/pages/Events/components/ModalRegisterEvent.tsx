@@ -1,4 +1,3 @@
-import useAuth from '@/app/hooks/useAuth'
 import { ButtonSpinner } from '@/components/ButtonSpinner'
 import { Button } from '@/components/ui/button'
 import {
@@ -24,9 +23,8 @@ import useModalRegisterEvent from '../useModalRegisterEvent'
 import { SelectCities } from './SelectCities'
 
 export function ModalRegisterEvent() {
-  const { form, onSubmit, isLoading, isDialogOpen, setIsDialogOpen } =
+  const { form, onSubmit, isLoading, isDialogOpen, setIsDialogOpen, isAdmin } =
     useModalRegisterEvent()
-  const { isAdmin } = useAuth()
 
   if (!isAdmin) {
     return null

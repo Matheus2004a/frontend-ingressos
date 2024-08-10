@@ -1,9 +1,4 @@
 import { Event } from '@/app/entities/Event'
-import { formatDateToDateTimeLocal } from '@/lib/utils'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
 import useAuth from '@/app/hooks/useAuth'
 import EventsServices from '@/app/services/EventsServices'
 import {
@@ -11,12 +6,17 @@ import {
   TypeSchemaRegisterEvent,
 } from '@/app/validations/schemaRegisterEvent'
 import { toast } from '@/components/ui/use-toast'
+import { formatDateToDateTimeLocal } from '@/lib/utils'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 export default function useModalUpdateEvent(event: Event) {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const isFirstRender = useRef(true)
 
-  const { user } = useAuth()
+  const { user, isAdmin } = useAuth()
   const form = useForm<TypeSchemaRegisterEvent>({
     resolver: zodResolver(schemaRegisterEvent),
     defaultValues: {
@@ -78,5 +78,6 @@ export default function useModalUpdateEvent(event: Event) {
     isLoading: isPending,
     isDialogOpen,
     setIsDialogOpen,
+    isAdmin,
   }
 }
