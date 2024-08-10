@@ -1,4 +1,5 @@
 import Events from '@/view/pages/Events'
+import Sales from '@/view/pages/Sales'
 import Signin from '@/view/pages/Signin'
 import Signup from '@/view/pages/Signup'
 import Tickets from '@/view/pages/Tickets'
@@ -15,6 +16,7 @@ export function Router() {
         <Route element={<PrivateRoutes />}>
           <Route path="/" element={<Events />} />
           <Route path="/tickets" element={<Tickets />} />
+          <Route path="/sales" element={<Sales />} />
         </Route>
       </Routes>
     </BrowserRouter>

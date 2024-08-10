@@ -10,7 +10,8 @@ import { Input } from '@/components/ui/input'
 import { formatDate } from '@/lib/utils'
 import { ModalRegisterEvent } from '@/view/pages/Events/components/ModalRegisterEvent'
 import { ModalRemoveEvent } from '@/view/pages/Events/components/ModalRemoveEvent'
-import { LogOut, MapPin, Search, TicketCheck } from 'lucide-react'
+import { ChevronRight, LogOut, MapPin, Search, TicketCheck } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { CardTicket } from './components/CardTickets'
 import { ModalConfirmationSaleTicket } from './components/ModalConfirmationSaleTicket'
 import { ModalUpdateEvent } from './components/ModalUpdateEvent'
@@ -102,6 +103,13 @@ export default function EventList() {
           </Card>
         ))}
       </section>
+
+      <Link to="/sales">
+        <Button className="mt-4">
+          Ver ingressos vendidos
+          <ChevronRight className="ml-2 h-4 w-4" />
+        </Button>
+      </Link>
     </div>
   )
 }

@@ -36,12 +36,7 @@ export function currencyStringToNumber(value: string | number) {
   return Number(sanitizedString)
 }
 
-export function generateRandomPrice(
-  min: number = 10,
-  max: number = 100,
-): string {
-  // Gera um número aleatório dentro do intervalo [min, max]
-  const price = Math.random() * (max - min) + min
+export function formatPrice(price: number): string {
   return price.toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL',
