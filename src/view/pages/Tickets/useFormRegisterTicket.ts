@@ -40,7 +40,7 @@ export default function useFormRegisterTicket() {
     const payload = {
       eventId: eventSelected?.id,
       type: values.type,
-      price: currencyStringToNumber(values.price),
+      price: Number(values.price),
       qtTicket: currencyStringToNumber(values.qtTicket),
       dtAvailability: new Date(values.dtAvailability).toISOString(),
     }
