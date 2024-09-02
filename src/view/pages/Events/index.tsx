@@ -34,15 +34,17 @@ export default function EventList() {
 
   return (
     <div className="px-6 py-5">
-      <h2 className="text-2xl font-bold mb-4">Próximos Eventos</h2>
+      <header className="flex items-center justify-between mb-4">
+        <h2 className="text-2xl font-bold">Próximos Eventos</h2>
 
-      <Button
-        onClick={signout}
-        className="absolute top-4 right-4 flex gap-2 text-white font-bold py-2 px-4 rounded-lg"
-      >
-        <LogOut size={24} />
-        Sair
-      </Button>
+        <Button
+          onClick={signout}
+          className="flex gap-2 text-white font-bold py-2 px-4 rounded-lg"
+        >
+          <LogOut size={24} />
+          Sair
+        </Button>
+      </header>
 
       <form
         className="flex items-center gap-3 max-w-lg mb-4"
@@ -104,12 +106,18 @@ export default function EventList() {
         ))}
       </section>
 
-      <Link to="/sales">
-        <Button className="mt-4">
-          Ver ingressos vendidos
-          <ChevronRight className="ml-2 h-4 w-4" />
-        </Button>
-      </Link>
+      <footer>
+        <Link to="/sales">
+          <Button className="mt-4">
+            Ver ingressos vendidos
+            <ChevronRight className="ml-2 h-4 w-4" />
+          </Button>
+        </Link>
+
+        <Link to="/rating">
+          <Button variant="link">Fazer avaliação</Button>
+        </Link>
+      </footer>
     </div>
   )
 }
